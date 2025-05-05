@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>សុំទោសស្រលាញ់</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Khmer&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Serif Khmer', serif;
+      background: linear-gradient(to right, #fbc2eb, #adc4ec);
+      color: #fff;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 20px;
+    ឮ​ឮ 
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      z-index: 1;
+    }
+
+    h1 {
+      font-size: 22px;
+      color: #fff;
+      margin-bottom: 15px;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .image-container {
+      margin: 20px 0;
+      position: relative;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .image-container img {
+      width: 70%;
+      max-width: 150px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      display: none;
+      cursor: pointer;
+    }
+
+    .image-container img.active {
+      display: block;
+    }
+
+    .heart {
+      font-size: 36px;
+      animation: pulse 1.5s infinite;
+      margin-top: 10px;
+      color: red;
+      text-shadow: 1px 1px 2px #800000, -1px -1px 2px #ff9999;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
+
+    audio {
+      margin-top: 10px;
+      width: 70%;
+    }
+
+    /* Falling Hearts */
+    .falling-heart {
+      position: fixed;
+      top: -50px;
+      color: red;
+      font-size: 24px;
+      animation: fall 6s linear infinite;
+      z-index: 0;
+      text-shadow: 1px 1px 2px #800000, -1px -1px 2px #ff9999;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>សុំទោសមនុស្សជាទីស្រលាញ់របស់បង❤️</h1>
+    <p>
+      បងសូមអភ័យទោសចំពោះអ្វីដែលបានកើតឡើង។<br/>
+      បងសន្យាថានឹងស្ដាប់អូន និងយល់ចិត្តជាងមុន។<br/>
+      សូមអូនអភ័យទោស និងសូមអោយអូនលើកទោសផងណា ❤️
+    </p>
+
+    <!-- Multiple Images with Toggle -->
+    <div class="image-container" id="gallery">
+      <img src="phorn.JPG" alt="Image 1" class="active">
+      <img src="phorn1.JPG" alt="Image 2">
+      <img src="phorn2.JPG" alt="Image 3">
+      <img src="phorn3.JPG" alt="Image 4">
+      <img src="phorn4.JPG" alt="">
+      <img src="phorn5.JPG" alt="">
+      <img src="phorn6.JPG" alt="">
+      <img src="phorn7.JPG" alt="">
+    </div>
+
+    <div class="heart">❤️</div>
+
+    <audio controls autoplay loop>
+      <source src="Recording (4).m4a" type="audio/mpeg">
+      Browser of you does not support audio playback.
+    </audio>
+  </div>
+
+  <!-- Falling hearts -->
+  <script>
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("falling-heart");
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+      heart.innerText = "❤️";
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+
+    setInterval(createHeart, 400);
+
+    // Toggle image function
+    const images = document.querySelectorAll("#gallery img");
+    let currentIndex = 0;
+
+    images.forEach((img, index) => {
+      img.addEventListener("click", () => {
+        images[currentIndex].classList.remove("active");
+        currentIndex = (index + 1) % images.length;
+        images[currentIndex].classList.add("active");
+      });
+    });
+  </script>
+
+</body>
+</html>
